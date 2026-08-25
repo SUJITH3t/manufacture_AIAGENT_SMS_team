@@ -1,0 +1,25 @@
+test_id,category,machine_id,expected_risk,actual_risk,risk_match,expected_escalation,actual_escalation,escalation_match,evidence_count,selected_tools,review_status,latency_sec,error
+TC-01,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.8327,None
+TC-02,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.0023,None
+TC-03,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-04,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.0023,None
+TC-05,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-06,normal,M-101,NORMAL,NORMAL,True,False,False,True,3,retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-07,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-08,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-09,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-10,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-11,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-12,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None
+TC-13,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0022,None
+TC-14,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0022,None
+TC-15,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0027,None
+TC-16,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0024,None
+TC-17,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0022,None
+TC-18,high_risk,M-201,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0023,None
+TC-19,failure,M-301,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0025,None
+TC-20,failure,M-301,HIGH,HIGH,True,True,False,False,0,,approved,0.0005,Sensor data missing and lookup failed: Database file './data/machines.json' not found.
+TC-21,failure,,HIGH,HIGH,True,False,False,True,0,,approved,0.0005,Missing required field: 'machine_id'.
+TC-22,failure,M-101,HIGH,HIGH,True,False,False,True,0,,approved,0.0005,Missing required field: 'user_query'.
+TC-23,failure,M-301,HIGH,HIGH,True,True,True,True,6,request_human_review; get_machine_history; calculate; retrieve_manufacturing_guidelines,human_review,0.0022,None
+TC-24,edge,M-102,EDGE,EDGE,True,False,False,True,6,get_machine_history; calculate; retrieve_manufacturing_guidelines,approved,0.0021,None

@@ -1,0 +1,268 @@
+{
+  "test_cases": [
+    {
+      "id": "TC-01",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 48.2, "vibration": 0.65, "pressure": 5.2, "speed": 4000, "humidity": 42.0, "status": "RUNNING"},
+      "user_query": "Verify machine health and confirm if parameters are in baseline limits.",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "Standard steady-state milling operation well within nominal bounds."
+    },
+    {
+      "id": "TC-02",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 55.0, "vibration": 1.10, "pressure": 5.8, "speed": 5500, "humidity": 45.0, "status": "RUNNING"},
+      "user_query": "Is the spindle temperature within the nominal operating band for roughing?",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "Normal high-speed roughing pass, temperature well below 68°C."
+    },
+    {
+      "id": "TC-03",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 62.1, "vibration": 1.45, "pressure": 4.9, "speed": 7200, "humidity": 50.0, "status": "RUNNING"},
+      "user_query": "Evaluate vibration velocity RMS against ISO 10816 Class A standards.",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "High RPM finishing cut with vibration at 1.45 mm/s (Class A < 1.8 mm/s)."
+    },
+    {
+      "id": "TC-04",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 42.0, "vibration": 0.40, "pressure": 5.5, "speed": 1500, "humidity": 38.0, "status": "RUNNING"},
+      "user_query": "Check baseline pneumatic and hydraulic pressures after tool change.",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "Post tool-change idle and warm-up sequence."
+    },
+    {
+      "id": "TC-05",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 58.6, "vibration": 1.25, "pressure": 5.1, "speed": 6000, "humidity": 44.0, "status": "RUNNING"},
+      "user_query": "Are any maintenance interventions required for current batch run?",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "Continuous production run with all metrics green."
+    },
+    {
+      "id": "TC-06",
+      "category": "normal",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 64.5, "vibration": 1.70, "pressure": 6.1, "speed": 8000, "humidity": 48.0, "status": "RUNNING"},
+      "user_query": "Verify high-speed spindle thermal stability.",
+      "expected_risk": "NORMAL",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines"],
+      "description": "High-speed aerospace pocketing within nominal specs."
+    },
+    {
+      "id": "TC-07",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 72.4, "vibration": 1.30, "pressure": 5.0, "speed": 5000, "humidity": 55.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Spindle temperature has entered the 72°C advisory zone. Recommend inspection steps.",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Spindle thermal drift in Zone 2 (68.1°C - 82.0°C) with normal vibration."
+    },
+    {
+      "id": "TC-08",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 54.0, "vibration": 2.45, "pressure": 5.3, "speed": 4800, "humidity": 46.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Vibration velocity is 2.45 mm/s RMS. Does this violate Class B standards?",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Class B warning vibration (1.81 - 3.8 mm/s) requiring trend monitoring."
+    },
+    {
+      "id": "TC-09",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 50.0, "vibration": 0.90, "pressure": 4.1, "speed": 3500, "humidity": 40.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Hydraulic line pressure dropped to 4.1 bar. Is there a cavitation risk?",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Hydraulic warning band (3.8 - 4.4 bar) with normal thermal stability."
+    },
+    {
+      "id": "TC-10",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 77.2, "vibration": 2.80, "pressure": 4.3, "speed": 6800, "humidity": 60.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Both temperature and vibration are showing moderate upward drift.",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Combined edge thermal and vibration drift."
+    },
+    {
+      "id": "TC-11",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 69.5, "vibration": 1.85, "pressure": 6.8, "speed": 5800, "humidity": 52.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Pressure is slightly elevated at 6.8 bar with borderline temperature.",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Upper pressure edge threshold (6.6 - 7.8 bar)."
+    },
+    {
+      "id": "TC-12",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 79.8, "vibration": 3.10, "pressure": 4.2, "speed": 7500, "humidity": 58.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Borderline critical thermal reading approaching 80°C threshold.",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "High edge parameter right near the critical threshold boundary."
+    },
+    {
+      "id": "TC-13",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 89.6, "vibration": 5.42, "pressure": 2.9, "speed": 8200, "humidity": 48.0, "status": "ELEVATED_RISK"},
+      "user_query": "Severe chatter and hot spindle detected during titanium turning.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Critical breach: Temp 89.6°C (>82°C), Vib 5.42 mm/s (>3.8 mm/s), Pressure 2.9 bar (<3.8 bar)."
+    },
+    {
+      "id": "TC-14",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 94.2, "vibration": 1.20, "pressure": 5.4, "speed": 6000, "humidity": 45.0, "status": "ELEVATED_RISK"},
+      "user_query": "Spindle thermal runaway detected at 94.2°C.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Severe thermal breach (>82°C) with imminent bearing galling risk."
+    },
+    {
+      "id": "TC-15",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 60.0, "vibration": 6.80, "pressure": 5.1, "speed": 7000, "humidity": 44.0, "status": "ELEVATED_RISK"},
+      "user_query": "Vibration sensor reading 6.8 mm/s RMS. Severe mechanical imbalance.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Class C/D critical vibration (>3.8 mm/s) - risk of catastrophic tool throw."
+    },
+    {
+      "id": "TC-16",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 52.0, "vibration": 1.10, "pressure": 1.8, "speed": 4000, "humidity": 40.0, "status": "ELEVATED_RISK"},
+      "user_query": "Hydraulic line pressure dropped to 1.8 bar during clamping cycle.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Critical low pressure (<3.8 bar) with imminent workpiece release danger."
+    },
+    {
+      "id": "TC-17",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 55.0, "vibration": 1.00, "pressure": 9.4, "speed": 5000, "humidity": 42.0, "status": "ELEVATED_RISK"},
+      "user_query": "Pressure spike detected at 9.4 bar. Hydraulic unloader valve suspected stuck.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Critical over-pressure (>7.8 bar) with hydraulic line burst risk."
+    },
+    {
+      "id": "TC-18",
+      "category": "high_risk",
+      "machine_id": "M-201",
+      "sensor_data": {"temperature": 86.5, "vibration": 4.30, "pressure": 3.4, "speed": 9500, "humidity": 50.0, "status": "ELEVATED_RISK"},
+      "user_query": "Multiple severe alarms simultaneously active during finish grind.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Triple parameter critical breach: Temp, Vib, Pressure all in red zone."
+    },
+    {
+      "id": "TC-19",
+      "category": "failure",
+      "machine_id": "M-301",
+      "sensor_data": {"temperature": -999.0, "vibration": 0.0, "pressure": -1.0, "speed": 0, "humidity": 0.0, "status": "SENSOR_FAULT"},
+      "user_query": "Sensor telemetry is reporting negative numbers. Advise on diagnostic protocol.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Sensor fault: Open circuit transducer sending non-physical values (-999°C, -1 bar)."
+    },
+    {
+      "id": "TC-20",
+      "category": "failure",
+      "machine_id": "M-301",
+      "sensor_data": {},
+      "user_query": "Check machine status without sensor payload.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Empty sensor payload triggering safety fallback and escalation."
+    },
+    {
+      "id": "TC-21",
+      "category": "failure",
+      "machine_id": "",
+      "sensor_data": {"temperature": 50.0, "vibration": 0.8, "pressure": 5.0, "speed": 3000, "humidity": 40.0, "status": "RUNNING"},
+      "user_query": "Assess telemetry without providing machine ID.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": false,
+      "expected_tools": [],
+      "description": "Input validation failure: Missing Machine ID."
+    },
+    {
+      "id": "TC-22",
+      "category": "failure",
+      "machine_id": "M-101",
+      "sensor_data": {"temperature": 50.0, "vibration": 0.8, "pressure": 5.0, "speed": 3000, "humidity": 40.0, "status": "RUNNING"},
+      "user_query": "",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": false,
+      "expected_tools": [],
+      "description": "Input validation failure: Empty user query."
+    },
+    {
+      "id": "TC-23",
+      "category": "failure",
+      "machine_id": "M-301",
+      "sensor_data": {"temperature": 450.0, "vibration": 150.0, "pressure": 80.0, "speed": 50000, "humidity": 120.0, "status": "SENSOR_FAULT"},
+      "user_query": "Telemetry wildly out of physical bounds.",
+      "expected_risk": "HIGH",
+      "expected_human_escalation": true,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate", "request_human_review"],
+      "description": "Extreme sensor corruption far exceeding any physical machine physics."
+    },
+    {
+      "id": "TC-24",
+      "category": "edge",
+      "machine_id": "M-102",
+      "sensor_data": {"temperature": 70.0, "vibration": 2.20, "pressure": 4.4, "speed": 6000, "humidity": 50.0, "status": "WARN_TELEMETRY"},
+      "user_query": "Assess multi-sensor borderline drift on lathe spindle.",
+      "expected_risk": "EDGE",
+      "expected_human_escalation": false,
+      "expected_tools": ["retrieve_manufacturing_guidelines", "get_machine_history", "calculate"],
+      "description": "Balanced edge case across temp, vib, and pressure warning bands."
+    }
+  ]
+}
