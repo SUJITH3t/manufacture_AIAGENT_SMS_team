@@ -1,5 +1,8 @@
 # ManufacturingAgent
 
+## Built for DAIM Agentic AI Summer Bootcamp 
+> more info https://jsmboli.github.io/agentic-ai-bootcamp/
+
 **Evidence-Grounded Manufacturing Monitoring and Decision-Support Agent with Risk Routing and Human Review**
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
